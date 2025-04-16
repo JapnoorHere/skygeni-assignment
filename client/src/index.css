@@ -1,0 +1,17 @@
+body{
+    overflow: hidden;
+}
+.container{
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+@media (max-width: 1010px){
+    .container{
+        display: block;
+    }      
+    body{
+        overflow: auto;
+    }
+}
