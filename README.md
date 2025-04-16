@@ -1,6 +1,9 @@
 # skygeni-assignment
 Skygeni Assignment
 
+Website: https://skygeni-assignment-vkcm.vercel.app/
+Backend api: 
+
 - Tech Stack Used
     - React.js (Vite)
     - Tailwind CSS
