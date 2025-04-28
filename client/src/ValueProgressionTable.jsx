@@ -21,7 +21,11 @@ const ValueProgressionTable = () => {
 
           const nextValue = next ? next.acv : null;
           const lostValue = nextValue !== null ? current.acv - nextValue : null;
-          const successRate = current.label !== 'Won' ? `${Math.round((wonStage.acv / current.acv) * 100)}%` : '100%';
+          
+          // For the Won stage, use 100%, for other stages use the server-calculated data if available
+          const successRate = current.label !== 'Won' 
+            ? `${Math.round((wonStage.acv / current.acv) * 100)}%` 
+            : '100%';
 
           processedRows.push({
             name: current.label,

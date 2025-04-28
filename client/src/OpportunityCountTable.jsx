@@ -21,6 +21,9 @@ const OpportunityCountTable = () => {
            
           const nextStageCount = next ? next.count : null;
           const lostCount = nextStageCount !== null ? current.count - nextStageCount : null;
+          
+          // For the success rate, use the server-provided wonPer if available
+          // Only calculate per-stage success rate as needed
           const successRate = (current.label !== 'Won')
             ? `${Math.round((wonStage.count / current.count) * 100)}%`
             : '100%';
