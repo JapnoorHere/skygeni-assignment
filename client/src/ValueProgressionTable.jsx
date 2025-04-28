@@ -52,10 +52,10 @@ const ValueProgressionTable = () => {
             <TableRow>
               <TableCell><strong>Stage</strong></TableCell>
               <TableCell><strong>Came to Stage</strong></TableCell>
-              <TableCell sx={{ bgcolor: '#f57c00', color: '#fff' }}>
+              <TableCell sx={{ bgcolor: '#c65911', color: '#fff' }}>
                 <strong>Lost / Disqualified from Stage</strong>
               </TableCell>
-              <TableCell sx={{ bgcolor: '#43a047', color: '#fff' }}>
+              <TableCell sx={{ bgcolor: '#70ad47', color: '#fff' }}>
                 <strong>Moved to next stage</strong>
               </TableCell>
               <TableCell><strong>Win Rate %</strong></TableCell>
@@ -66,7 +66,7 @@ const ValueProgressionTable = () => {
               <TableRow key={idx}>
                 <TableCell>{row.name}</TableCell>
                 <TableCell
-                  sx={row.isWonStage ? { bgcolor: '#43a047', color: 'white' } : {}}
+                  sx={row.isWonStage ? { bgcolor: '#548236', color: 'white' } : {}}
                 >
                   {row.isWonStage ? `$${Math.floor(row.incomingRaw).toLocaleString()}` : row.incoming}
                 </TableCell>

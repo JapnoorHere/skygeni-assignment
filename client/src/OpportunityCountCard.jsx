@@ -17,7 +17,7 @@ const OpportunityBar = ({ name, total, ratio, success }) => (
 
         <Box
           width={`${ratio}%`}
-          bgcolor="green"
+          bgcolor="#70ad47"
           display="flex"
           alignItems="center"
           justifyContent="center"

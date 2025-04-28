@@ -71,7 +71,7 @@ const OpportunityRow = ({ label, value, conversion, success }) => (
           />
           <Box
             width={`${conversion}%`}
-            bgcolor="green"
+            bgcolor="#70ad47"
             display="flex"
             alignItems="center"
             justifyContent="center"
