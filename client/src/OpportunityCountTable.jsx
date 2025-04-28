@@ -4,44 +4,42 @@ import {
   TableHead, TableRow, Typography, Paper
 } from '@mui/material';
 
-const DashboardTable = () => {
+const OpportunityCountTable = () => {
+  const [tableData, setTableData] = useState([]);
   
-  const [rows, setRows] = useState([]);
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_API}/api/dashboard-data`)
+    fetch(`${import.meta.env.VITE_BACKEND_API}/api/dashboard`)
       .then(res => res.json())
       .then(data => {
+        const stages = data.pipelineData;
+        const wonStage = stages.find(stage => stage.label === 'Won');
+        const processedRows = [];
 
-        const pipeline = data.pipelineData;
-        const won = pipeline.find(stage => stage.label === 'Won');
-        const tableRows = [];
-
-        for (let i = 0; i < pipeline.length; i++) {
-          const current = pipeline[i];
-          const next = pipeline[i + 1];
+        for (let i = 0; i < stages.length; i++) {
+          const current = stages[i];
+          const next = stages[i + 1];
            
-          const movedToNext = next ? next.count : null;
-          const lost = movedToNext !== null ? current.count - movedToNext : null;
-          const winRate = (current.label !== 'Won')
-            ? `${Math.round((won.count / current.count) * 100)}%`
+          const nextStageCount = next ? next.count : null;
+          const lostCount = nextStageCount !== null ? current.count - nextStageCount : null;
+          const successRate = (current.label !== 'Won')
+            ? `${Math.round((wonStage.count / current.count) * 100)}%`
             : '100%';
 
-          tableRows.push({
-            stage: current.label,
-            came: current.count,
-            lost: lost !== null ? lost : '',
-            moved: movedToNext !== null ? movedToNext : '',
-            winRate,
-            isWon: current.label === 'Won'
+          processedRows.push({
+            name: current.label,
+            incoming: current.count,
+            lost: lostCount !== null ? lostCount : '',
+            advanced: nextStageCount !== null ? nextStageCount : '',
+            successRate,
+            isWonStage: current.label === 'Won'
           });
         }
 
-        setRows(tableRows);
+        setTableData(processedRows);
       });
   },[]);
 
-
-  const totalLost = rows.reduce((sum, row) => sum + (parseInt(row.lost) || 0), 0);
+  const totalLostCount = tableData.reduce((sum, row) => sum + (parseInt(row.lost) || 0), 0);
 
   return (
     <Paper sx={{ m: 2, p: 2 }} variant="outlined">
@@ -64,21 +62,21 @@ const DashboardTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
+            {tableData.map((row, i) => (
               <TableRow key={i}>
-                <TableCell>{row.stage}</TableCell>
-                <TableCell sx={row.isWon ? { bgcolor: '#43a047', color: 'white' } : {}}>
-                  {row.came}
+                <TableCell>{row.name}</TableCell>
+                <TableCell sx={row.isWonStage ? { bgcolor: '#43a047', color: 'white' } : {}}>
+                  {row.incoming}
                 </TableCell>
                 <TableCell>{row.lost}</TableCell>
-                <TableCell>{row.moved}</TableCell>
-                <TableCell>{row.winRate}</TableCell>
+                <TableCell>{row.advanced}</TableCell>
+                <TableCell>{row.successRate}</TableCell>
               </TableRow>
             ))}
             <TableRow>
               <TableCell><strong>Total</strong></TableCell>
               <TableCell>-</TableCell>
-              <TableCell><strong>{totalLost}</strong></TableCell>
+              <TableCell><strong>{totalLostCount}</strong></TableCell>
               <TableCell>-</TableCell>
               <TableCell>-</TableCell>
             </TableRow>
@@ -89,4 +87,4 @@ const DashboardTable = () => {
   );
 };
 
-export default DashboardTable;
+export default OpportunityCountTable;

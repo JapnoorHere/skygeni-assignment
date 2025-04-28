@@ -9,34 +9,31 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-app.get('/api/dashboard-data', (req, res) => {
-  fs.readFile(path.join(__dirname, 'data/data.json'), 'utf8', (err, jsonData) => {
+app.get('/api/dashboard', (req, res) => {
+  fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, rawData) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Failed to load data');
     }
 
-    const rawData = JSON.parse(jsonData);
+    const stages = JSON.parse(rawData);
+    const suspectStage = stages.find(item => item.label === 'Suspect');
+    const qualifyStage = stages.find(item => item.label === 'Qualify');
+    const wonStage = stages.find(item => item.label === 'Won');
 
-    const suspect = rawData.find(item => item.label === 'Suspect');
-    const qualify = rawData.find(item => item.label === 'Qualify');
-    const won = rawData.find(item => item.label === 'Won');
+    const qualifyRate = Math.round((qualifyStage.acv / suspectStage.acv) * 100);
+    const winRate = Math.round((wonStage.acv / suspectStage.acv) * 100);
 
-    const qualifyPercentage = Number(((qualify.acv / suspect.acv) * 100).toFixed(2));
-    const wonPercentage = Math.round((won.acv / suspect.acv) * 100);
-
-    const response = {
-      pipelineData: rawData,
-      summary: {
-        suspectValue: suspect.acv,
-        qualifyValue: qualify.acv,
-        wonValue: won.acv,
-        qualifyPercentage,
-        wonPercentage,
-      }
+    const responseData = {
+        pipelineData: stages,
+        suspectValue: suspectStage.acv,
+        qualifyValue: qualifyStage.acv,
+        wonValue: wonStage.acv,
+        qualifyPer: qualifyRate,
+        wonPer: winRate,
     };
 
-    res.json(response); 
+    res.json(responseData); 
   });
 });
 

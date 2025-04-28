@@ -1,17 +1,9 @@
-body{
-    overflow: hidden;
-}
 .container{
     display: grid; 
     grid-template-columns: repeat(2, 1fr); 
-    gap: 20px;
-    padding: 20px;
 }
-@media (max-width: 1010px){
+@media (max-width: 1000px){
     .container{
-        display: block;
+        grid-template-columns: repeat(1, 1fr); 
     }      
-    body{
-        overflow: auto;
-    }
 }
