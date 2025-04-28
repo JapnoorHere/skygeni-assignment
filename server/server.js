@@ -2,16 +2,18 @@ const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
 require('dotenv').config()
-
+const path = require('path')
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 
 
 
 app.get('/api/dashboard', (req, res) => {
-  fs.readFile('/data.json', 'utf8', (err, rawData) => {
+  fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, rawData) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Failed to load data');
