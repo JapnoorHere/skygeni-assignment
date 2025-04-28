@@ -11,7 +11,7 @@ app.use(cors());
 
 
 app.get('/api/dashboard', (req, res) => {
-  fs.readFile('./data.json', 'utf8', (err, rawData) => {
+  fs.readFile('/data.json', 'utf8', (err, rawData) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Failed to load data');
