@@ -15,7 +15,7 @@ app.use(cors({
 app.get('/api/dashboard', (req, res) => {
   fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, rawData) => {
     if (err) {
-      console.error(err);
+      
       return res.status(500).send('Failed to load data');
     }
 
@@ -29,14 +29,14 @@ app.get('/api/dashboard', (req, res) => {
 
     const qualifyRate = Math.round((qualifyStage.acv / suspectStage.acv) * 100);
     const winRate = Math.round((wonStage.acv / suspectStage.acv) * 100);
-    console.log('-=====');
     
-    console.log({
+    
+    
         suspectStage, qualifyStage, wonStage
     });
 
-    console.log("qualifyRate", qualifyRate);
-    console.log("winRate", winRate);
+    
+    
     
     
 
@@ -49,8 +49,8 @@ app.get('/api/dashboard', (req, res) => {
         wonPer: winRate,
     };
 
-    console.log(';;;;;;;;;;;;;;;;;;;');
-    console.log(responseData);
+    
+    
     
     
 
@@ -59,5 +59,5 @@ app.get('/api/dashboard', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+  
 });
