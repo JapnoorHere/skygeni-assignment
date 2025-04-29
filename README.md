@@ -2,17 +2,16 @@
 Skygeni Assignment
 
 Website: https://skygeni-assignment-vkcm.vercel.app/
-Backend api: 
 
 - Tech Stack Used
     - React.js (Vite)
     - Tailwind CSS
     - D3 JS
-    - Exprss JS
+    - Express JS
     - Node JS
     - Deployment: Vercel
 
-- Installation of frontend
+- Setup of client
   <ol>
     <li>Clone the repository</li>
     <li>cd client</li>
@@ -24,7 +23,7 @@ Backend api:
   <li>Run command to start client: npm run dev</li>
     
   </ol>
-- Installation of backend
+- Setup of server
   <ol>
     <li>Clone the repository</li>
     <li>cd server</li>
@@ -37,5 +36,6 @@ Backend api:
   </ol>
 
 
-![image](https://github.com/user-attachments/assets/92ea6854-ee8e-4a72-8e38-7a91be163330)
+![image](https://github.com/user-attachments/assets/4733924a-8f95-4070-9cf1-4b90c899e059)
+
 
