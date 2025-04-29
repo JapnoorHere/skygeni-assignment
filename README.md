@@ -37,5 +37,6 @@ Backend api:
   </ol>
 
 
-![image](https://github.com/user-attachments/assets/92ea6854-ee8e-4a72-8e38-7a91be163330)
+![image](https://github.com/user-attachments/assets/4733924a-8f95-4070-9cf1-4b90c899e059)
+
 
