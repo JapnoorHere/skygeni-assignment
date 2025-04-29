@@ -7,11 +7,11 @@ Website: https://skygeni-assignment-vkcm.vercel.app/
     - React.js (Vite)
     - Tailwind CSS
     - D3 JS
-    - Exprss JS
+    - Express JS
     - Node JS
     - Deployment: Vercel
 
-- Installation of frontend
+- Setup of client
   <ol>
     <li>Clone the repository</li>
     <li>cd client</li>
@@ -23,7 +23,7 @@ Website: https://skygeni-assignment-vkcm.vercel.app/
   <li>Run command to start client: npm run dev</li>
     
   </ol>
-- Installation of backend
+- Setup of server
   <ol>
     <li>Clone the repository</li>
     <li>cd server</li>
