@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardContent, Box } from '@mui/material';
 import * as d3 from 'd3';
 
 const OpportunityCountCard = () => {
@@ -95,14 +95,14 @@ const OpportunityCountCard = () => {
   return (
     <Card sx={{ margin: 2 }} variant="outlined">
       <CardContent>
-        <Typography variant="h6" mb={2}>
+        <h2>
           Win Rate by opportunity count: {totalSuccess}%
-        </Typography>
+        </h2>
 
         {opportunities.map((item, index) => (
           <Box key={index} display="flex" alignItems="center" justifyContent="space-between" mb={1} height={20}>
             <Box minWidth={80}>
-              <Typography variant="body2">{item.name}</Typography>
+              <h5>{item.name}</h5>
             </Box>
             
             <Box 
@@ -113,7 +113,7 @@ const OpportunityCountCard = () => {
             />
             
             <Box minWidth={40} textAlign="right">
-              <Typography variant="body2">{item.success}%</Typography>
+              <p>{item.success}%</p>
             </Box>
           </Box>
         ))}

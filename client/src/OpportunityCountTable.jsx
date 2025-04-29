@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Typography, Paper
+  TableHead, TableRow, Paper
 } from '@mui/material';
 
 const OpportunityCountTable = () => {
@@ -22,8 +22,6 @@ const OpportunityCountTable = () => {
           const nextStageCount = next ? next.count : null;
           const lostCount = nextStageCount !== null ? current.count - nextStageCount : null;
           
-          // For the success rate, use the server-provided wonPer if available
-          // Only calculate per-stage success rate as needed
           const successRate = (current.label !== 'Won')
             ? `${Math.round((wonStage.count / current.count) * 100)}%`
             : '100%';
@@ -46,9 +44,9 @@ const OpportunityCountTable = () => {
 
   return (
     <Paper sx={{ m: 2, p: 2 }} variant="outlined">
-      <Typography variant="h6" gutterBottom>
+      <h2>
         Win Rate Table
-      </Typography>
+      </h2>
       <TableContainer>
         <Table size="small">
           <TableHead>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Typography, Paper
+  TableHead, TableRow, Paper
 } from '@mui/material';
 
 const ValueProgressionTable = () => {
@@ -47,9 +47,9 @@ const ValueProgressionTable = () => {
 
   return (
     <Paper sx={{ m: 2, p: 2 }} variant="outlined">
-      <Typography variant="h6" gutterBottom>
+      <h2>
         Win Rate by ACV
-      </Typography>
+      </h2>
       <TableContainer>
         <Table size="small">
           <TableHead>

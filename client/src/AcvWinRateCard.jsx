@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, CardContent, Typography, Box } from '@mui/material';
+import { Card, CardContent, Box } from '@mui/material';
 import * as d3 from 'd3';
 
 const AcvWinRateCard = () => {
@@ -95,14 +95,14 @@ const AcvWinRateCard = () => {
   return (
     <Card sx={{ margin: 2 }} variant="outlined">
       <CardContent>
-        <Typography variant="h6" mb={2}>
+        <h2>
           Win Rate by ACV: {totalWinRate}%
-        </Typography>
+        </h2>
 
         {stageData.map((item, idx) => (
           <Box key={idx} display="flex" alignItems="center" justifyContent="space-between" mb={1} height={20}>
             <Box width={80}>
-              <Typography variant="body2">{item.label}</Typography>
+              <h5>{item.label}</h5>
             </Box>
             
             <Box 
@@ -113,7 +113,7 @@ const AcvWinRateCard = () => {
             />
             
             <Box width={40} textAlign="right">
-              <Typography variant="body2">{item.success}%</Typography>
+              <p>{item.success}%</p>
             </Box>
           </Box>
         ))}
