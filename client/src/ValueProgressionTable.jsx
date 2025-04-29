@@ -22,27 +22,24 @@ const ValueProgressionTable = () => {
           const nextValue = next ? next.acv : null;
           const lostValue = nextValue !== null ? current.acv - nextValue : null;
           
-          const successRate = current.label !== 'Won' 
-            ? `${Math.round((wonStage.acv / current.acv) * 100)}%` 
-            : '100%';
+          const successRate = Math.round((wonStage.acv / current.acv) * 100);
 
           processedRows.push({
-            name: current.label,
-            incoming: current.label === 'Won' ? '' : current.acv ? `$${Math.floor(current.acv).toLocaleString()}` : '',
-            lost: lostValue !== null ? `$${Math.floor(lostValue).toLocaleString()}` : '',
-            advanced: nextValue !== null ? `$${Math.floor(nextValue).toLocaleString()}` : '',
+            label: current.label,
+            incoming: Math.floor(current.acv),
+            lost: lostValue !== null ? Math.floor(lostValue) : null,
+            advanced: nextValue !== null ? Math.floor(nextValue) : null,
             successRate,
             isWonStage: current.label === 'Won',
-            incomingRaw: current.acv || 0,
-            lostRaw: lostValue || 0,
+            incomingRaw: current.acv,
+            lostRaw: lostValue,
           });
         }
-
         setTableData(processedRows);
       });
   }, []);
 
-  const totalLost = tableData.reduce((sum, row) => sum + (row.lostRaw || 0), 0);
+  const totalLost = tableData.reduce((sum, row) => sum + (row.lostRaw), 0);
 
   return (
     <Paper sx={{ m: 2, p: 2 }} variant="outlined">
@@ -66,8 +63,8 @@ const ValueProgressionTable = () => {
           </TableHead>
           <TableBody>
             {tableData.map((row, idx) => (
-              <TableRow key={idx}>
-                <TableCell>{row.name}</TableCell>
+              <TableRow key={idx} sx={idx%2!== 0 ? { bgcolor: '#f5f5f5' } : {}}>
+                <TableCell>{row.label}</TableCell>
                 <TableCell
                   sx={row.isWonStage ? { bgcolor: '#548236', color: 'white' } : {}}
                 >
@@ -75,7 +72,7 @@ const ValueProgressionTable = () => {
                 </TableCell>
                 <TableCell>{row.lost}</TableCell>
                 <TableCell>{row.advanced}</TableCell>
-                <TableCell>{row.successRate}</TableCell>
+                <TableCell>{row.successRate}%</TableCell>
               </TableRow>
             ))}
             <TableRow>

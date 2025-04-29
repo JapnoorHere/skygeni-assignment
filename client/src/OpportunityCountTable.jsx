@@ -22,15 +22,13 @@ const OpportunityCountTable = () => {
           const nextStageCount = next ? next.count : null;
           const lostCount = nextStageCount !== null ? current.count - nextStageCount : null;
           
-          const successRate = (current.label !== 'Won')
-            ? `${Math.round((wonStage.count / current.count) * 100)}%`
-            : '100%';
+          const successRate = Math.round((wonStage.count / current.count) * 100);
 
           processedRows.push({
-            name: current.label,
-            incoming: current.count,
-            lost: lostCount !== null ? lostCount : '',
-            advanced: nextStageCount !== null ? nextStageCount : '',
+            label: current.label,
+            count: current.count,
+            lost:  lostCount,
+            advanced: nextStageCount,
             successRate,
             isWonStage: current.label === 'Won'
           });
@@ -40,7 +38,7 @@ const OpportunityCountTable = () => {
       });
   },[]);
 
-  const totalLostCount = tableData.reduce((sum, row) => sum + (parseInt(row.lost) || 0), 0);
+    const totalLostCount = tableData.reduce((sum, row) => sum + (row.lost), 0);
 
   return (
     <Paper sx={{ m: 2, p: 2 }} variant="outlined">
@@ -64,14 +62,14 @@ const OpportunityCountTable = () => {
           </TableHead>
           <TableBody>
             {tableData.map((row, i) => (
-              <TableRow key={i}>
-                <TableCell>{row.name}</TableCell>
+              <TableRow key={i} sx={i%2!== 0 ? { bgcolor: '#f5f5f5' } : {}}>
+                <TableCell>{row.label}</TableCell>
                 <TableCell sx={row.isWonStage ? { bgcolor: '#548236', color: 'white' } : {}}>
-                  {row.incoming}
+                  {row.count}
                 </TableCell>
                 <TableCell>{row.lost}</TableCell>
                 <TableCell>{row.advanced}</TableCell>
-                <TableCell>{row.successRate}</TableCell>
+                <TableCell>{row.successRate}%</TableCell>
               </TableRow>
             ))}
             <TableRow>

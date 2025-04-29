@@ -29,7 +29,7 @@ app.get('/api/dashboard', (req, res) => {
 
     const qualifyRate = Math.round((qualifyStage.acv / suspectStage.acv) * 100);
     const winRate = Math.round((wonStage.acv / suspectStage.acv) * 100);
-
+    const successRate = Math.round((wonStage.count / suspectStage.count)*100)
     const responseData = {
         pipelineData: stages,
         suspectValue: suspectStage.acv,
@@ -37,7 +37,13 @@ app.get('/api/dashboard', (req, res) => {
         wonValue: wonStage.acv,
         qualifyPer: qualifyRate,
         wonPer: winRate,
+        successPer: successRate
     };
+    console.log(responseData);
+    console.log("suc", 
+        
+    );
+    
     res.json(responseData); 
   });
 });

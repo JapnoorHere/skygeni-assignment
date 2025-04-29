@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 const AcvWinRateCard = () => {
   const [stageData, setStageData] = useState([]);
   const [totalWinRate, setTotalWinRate] = useState(0);
-  const rowRefs = useRef({});
+  const rowRefs = useRef([]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_API}/api/dashboard`)
@@ -29,6 +29,8 @@ const AcvWinRateCard = () => {
           };
         });
 
+        rowRefs.current = Array(formattedStages.length).fill(null);
+        
         setStageData(formattedStages);
       });
   }, []);
@@ -36,8 +38,8 @@ const AcvWinRateCard = () => {
   useEffect(() => {
     if (stageData.length > 0) {
       stageData.forEach((item, idx) => {
-        if (rowRefs.current[`row-${idx}`]) {
-          renderD3Bar(rowRefs.current[`row-${idx}`], item);
+        if (rowRefs.current[idx]) {
+          renderD3Bar(rowRefs.current[idx], item);
         }
       });
     }
@@ -80,10 +82,10 @@ const AcvWinRateCard = () => {
       .attr("fill", "white")
       .attr("font-weight", "bold")
       .attr("font-size", "14px")
-      .text(`${Math.floor(data.value).toLocaleString()}`);
+      .text(`$${Math.floor(data.value).toLocaleString()}`);
       
     svg.append("text")
-      .attr("x", startPosition - 5)
+      .attr("x", startPosition - 15)
       .attr("y", height / 2)
       .attr("text-anchor", "end")
       .attr("dominant-baseline", "middle")
@@ -108,8 +110,8 @@ const AcvWinRateCard = () => {
             <Box 
               flex={1} 
               mx={1} 
-              height={24} 
-              ref={el => rowRefs.current[`row-${idx}`] = el}
+              height={24}
+              ref={el => rowRefs.current[idx] = el}
             />
             
             <Box width={40} textAlign="right">
@@ -122,4 +124,4 @@ const AcvWinRateCard = () => {
   );
 };
 
-export default AcvWinRateCard;
+export default AcvWinRateCard;  
